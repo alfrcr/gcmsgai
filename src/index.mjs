@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const axios = require("axios");
-const { execSync } = require("child_process");
+import { execSync } from "child_process";
+import axios from "axios";
 
 function getDiff() {
   try {
@@ -45,15 +45,15 @@ async function createCommitMessageFrom(diff) {
   }
 }
 
-function commit(message) {
-  const gitCommand = `git commit -m "${message}"`;
-  execSync(gitCommand, { encoding: "utf-8" });
+function commit(message, args) {
+  const cmd = `git commit -m "${message}" ${args}`;
+  execSync(cmd, { encoding: "utf-8" });
 }
 
-async function main() {
+async function main(args) {
   const diff = getDiff();
   const msg = await createCommitMessageFrom(diff);
-  commit(msg);
+  commit(msg, args);
 }
 
-main();
+main(process.argv.slice(2));
