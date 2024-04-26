@@ -16,12 +16,12 @@ function getDiff() {
 const prompt = (diff) => `
 Generate a git commit message for the following code diff with the following specification:
 1. The message must be a maximum 80 characters.
-2. Summarize the code, what the code does, in one sentence.
+2. Summarize the changes, what is the file changed, what the new change does, in one sentence.
 3. Language must be English and in the form of present tense.
-4. IMPORTANT! Please respond with ONLY the commit message. EXCLUDE everything else!
+4. IMPORTANT! Please respond with ONLY the commit message. EXCLUDE everything else! Your message will be used as a commit message directly.
 
 Code diff:
-    ${diff}
+  ${diff}
 `;
 
 async function createCommitMessageFrom(diff) {
